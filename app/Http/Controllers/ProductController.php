@@ -8,11 +8,15 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
-    public function index(){
-        $products = Product::all();
-        return view('product.index', ['products' => $products]);
+    public function index(Request $request){
+        $search = $request->search;
 
-    }
+        $products = Product::where('name', 'LIKE', "%{$search}%")
+           ->orWhere('description', 'LIKE', "%{$search}%")
+           ->get();
+
+        return view('product.index', compact('products', 'search'));
+   }
 
     public function create(){
         $categories = Category::all();
