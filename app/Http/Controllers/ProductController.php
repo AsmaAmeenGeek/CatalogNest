@@ -34,7 +34,7 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'nullable',
             'price' => 'required|numeric',
-            'qty' => 'required|integer',
+            'qty' => 'required|integer|min:0',
         ]);
 
         Product::create([
@@ -62,7 +62,7 @@ public function update(Request $request, Product $product)
         'name' => 'required',
         'description' => 'nullable',
         'price' => 'required|numeric',
-        'qty' => 'required|integer',
+        'qty' => 'required|integer|min:0',
         'category_id' => 'nullable|exists:categories,id',
     ]);
 

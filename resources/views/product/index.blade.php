@@ -98,40 +98,49 @@
                             </td>
 
                             <td class="px-6 py-5">
-                                @if($product->status)
-                                     <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">🟢 Active </span>
-                                @else
-                                     <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm"> 🔴 Inactive  (Out of Stock) </span>
-                                @endif
-                            </td>
+
+                            @if($product->qty == 0)
+
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+                                    🔴 Out of Stock
+                                </span>
+
+                            @elseif($product->qty <= 5)
+
+                                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">
+                                    ⚠ Low Stock ({{ $product->qty }})
+                                </span>
+
+                            @else
+
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                                    🟢 In Stock ({{ $product->qty }})
+                                </span>
+
+                            @endif
+
+                        </td>
 
                             <td class="px-6 py-5">
 
-    <div class="flex justify-center gap-3">
+                            <div class="flex justify-center gap-3">
 
-        <!-- EDIT -->
-        <a href="{{ route('product.edit', $product->id) }}"
-           class="bg-[#d2b48c] hover:bg-[#c19a6b] text-[#4b3621] px-4 py-2 rounded-xl shadow transition">
-            Edit
-        </a>
+                                    <!-- EDIT -->
+                                 <a href="{{ route('product.edit', $product->id) }}"
+                                  class="bg-[#d2b48c] hover:bg-[#c19a6b] text-[#4b3621] px-4 py-2 rounded-xl shadow transition"> Edit
+                                 </a>
 
-        <!-- DELETE -->
-        <form action="{{ route('product.destroy', $product->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
+                                          <!-- DELETE -->
+                                <form action="{{ route('product.destroy', $product->id) }}" method="POST">
+                                 @csrf
+                                 @method('DELETE')
 
-            <button type="submit"
-                class="bg-[#e07a7a] hover:bg-[#c96565] text-white px-4 py-2 rounded-xl shadow transition">
-                Delete
-            </button>
-        </form>
-
-
-
-    </div>
-
+                                <button type="submit"
+                                 class="bg-[#e07a7a] hover:bg-[#c96565] text-white px-4 py-2 rounded-xl shadow transition"> Delete
+                                </button>
+                                </form>
+                            </div>
 </td>
-
                         </tr>
 
                     @empty

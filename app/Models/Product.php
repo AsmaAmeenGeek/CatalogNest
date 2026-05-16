@@ -11,8 +11,7 @@ class Product extends Model
         'description',
         'price',
         'qty',
-        'category_id',
-        'status'
+        'category_id'
     ];
 
     public function category()
@@ -20,7 +19,7 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // 🔥 AUTO STATUS LOGIC (IMPORTANT FIX)
+    // 🔥 AUTO STATUS BASED ON QTY (CLEAN + SAFE)
     protected static function boot()
     {
         parent::boot();
@@ -28,5 +27,24 @@ class Product extends Model
         static::saving(function ($product) {
             $product->status = $product->qty > 0 ? 1 : 0;
         });
+    }
+
+    // =========================
+    // 📦 INVENTORY HELPERS
+    // =========================
+
+    public function isInStock()
+    {
+        return $this->qty > 0;
+    }
+
+    public function isOutOfStock()
+    {
+        return $this->qty == 0;
+    }
+
+    public function isLowStock()
+    {
+        return $this->qty > 0 && $this->qty <= 5;
     }
 }
