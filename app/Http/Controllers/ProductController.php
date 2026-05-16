@@ -11,9 +11,14 @@ class ProductController extends Controller
     public function index(Request $request){
         $search = $request->search;
 
-        $products = Product::where('name', 'LIKE', "%{$search}%")
-           ->orWhere('description', 'LIKE', "%{$search}%")
-           ->get();
+        $products = Product::where(function ($query) use ($search) {
+        $query->where('name', 'LIKE', "%{$search}%")
+              ->orWhere('description', 'LIKE', "%{$search}%");
+        })
+              ->orWhereHas('category', function ($query) use ($search) {
+        $query->where('name', 'LIKE', "%{$search}%");
+    })
+    ->get();
 
         return view('product.index', compact('products', 'search'));
    }
@@ -38,7 +43,7 @@ class ProductController extends Controller
            'price' => $request->price,
            'qty' => $request->qty,
            'category_id' => $request->category_id,
-        ]);
+]);
 
         return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
@@ -51,19 +56,27 @@ class ProductController extends Controller
             return view('product.edit', compact('product', 'categories'));
        }
 
-    public function update(Request $request, Product $product)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
-            'price' => 'required|numeric',
-            'qty' => 'required|integer',
-        ]);
+public function update(Request $request, Product $product)
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'nullable',
+        'price' => 'required|numeric',
+        'qty' => 'required|integer',
+        'category_id' => 'nullable|exists:categories,id',
+    ]);
 
-        $product->update($request->all());
+    $product->update([
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'qty' => $request->qty,
+        'category_id' => $request->category_id,
+    ]);
 
-        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
-    }
+    return redirect()->route('product.index')
+        ->with('success', 'Product updated successfully.');
+}
 
     public function destroy(Product $product)
     {
