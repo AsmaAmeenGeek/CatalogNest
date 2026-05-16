@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
     public function index(){
-        $product = Product::all();
-        return view('product.index', ['products' => $product]);
+        $products = Product::all();
+        return view('product.index', ['products' => $products]);
 
     }
 
-    public function create()
-    {
-        return view('product.create');
+    public function create(){
+        $categories = Category::all();
+        return view('product.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -27,15 +28,24 @@ class ProductController extends Controller
             'qty' => 'required|integer',
         ]);
 
-        Product::create($request->all());
+        Product::create([
+           'name' => $request->name,
+           'description' => $request->description,
+           'price' => $request->price,
+           'qty' => $request->qty,
+           'category_id' => $request->category_id,
+        ]);
 
         return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
 
-    public function edit(Product $product)
-    {
-        return view('product.edit', compact('product'));
-    }
+
+        public function edit($id){
+            $product = Product::findOrFail($id);
+            $categories = Category::all();
+
+            return view('product.edit', compact('product', 'categories'));
+       }
 
     public function update(Request $request, Product $product)
     {
@@ -57,7 +67,4 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Product deleted successfully!');
     }
-
-
-
 }

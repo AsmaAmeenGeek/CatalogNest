@@ -1,5 +1,4 @@
 
-
 <x-app-layout>
 
     <div class="max-w-3xl mx-auto">
@@ -28,22 +27,38 @@
 
                 <div class="mb-6">
                     <label class="block text-[#4b3621] font-semibold mb-2"> Description </label>
-                    <textarea name="description" rows="5" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c]"></textarea>
+                    <textarea name="description" rows="5" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c]" placeholder="Description"></textarea>
                 </div>
 
                 <div class="mb-8">
                     <label class="block text-[#4b3621] font-semibold mb-2"> Price </label>
 
-                    <input type="number" name="price" step="0.01" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c]" >
+                    <input type="number" name="price" step="0.01" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c]" placeholder="Price in Rs." >
                 </div>
 
                 <div class="mb-8">
                     <label class="block text-[#4b3621] font-semibold mb-2"> Quantity </label>
 
-                    <input type="number" name="qty" step="0.01" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c]" >
+                    <input type="number" name="qty" step="0.01" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c]" placeholder="Quantity" >
                 </div>
 
-                <button type="submit" class="bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-8 py-4 rounded-2xl shadow-lg transition" > Create Product </button>
+                <div class="mb-8">
+                    <label class="block text-[#4b3621] font-semibold mb-2">Category</label>
+
+                    <select name="category_id" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c] text-gray-500">
+                       <option value="">Select Category</option>
+                             @foreach($categories as $category)
+                                <option value="{{ $category->id }}" class="text-black">
+                                  {{ $category->name }}
+                               </option>
+                             @endforeach
+                   </select>
+                </div>
+
+                <button type="submit"
+                    class="mt-4 bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-8 py-4 rounded-2xl shadow-lg transition">
+                    Create Product
+                </button>
             </form>
         </div>
     </div>

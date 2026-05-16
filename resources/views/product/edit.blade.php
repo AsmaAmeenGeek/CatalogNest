@@ -42,6 +42,24 @@
                     <input type="number" name="qty" step="0.01" value="{{ $product->qty }}" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c]">
                 </div>
 
+                <div class="mb-8">
+                    <label class="block text-[#4b3621] font-semibold mb-2"> Category </label>
+
+                    <select name="category_id"
+                     class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c] text-gray-500">
+
+                    <option value="">Select Category</option>
+
+                         @foreach($categories as $category)
+                            <option value="{{ $category->id }}"
+                                 {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                 {{ $category->name }}
+                            </option>
+                        @endforeach
+
+                    </select>
+                </div>
+
                 <button type="submit" class="bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-8 py-4 rounded-2xl shadow-lg transition"> Update Product </button>
             </form>
         </div>

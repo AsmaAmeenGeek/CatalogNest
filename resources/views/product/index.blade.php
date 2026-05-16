@@ -28,7 +28,9 @@
                         <th class="px-6 py-4 text-left">Description</th>
                         <th class="px-6 py-4 text-left">Price (Rs.)</th>
                         <th class="px-6 py-4 text-left">Quantity</th>
+                        <th class="px-6 py-4 text-left">Category</th>
                         <th class="px-6 py-4 text-center">Actions</th>
+
                     </tr>
                 </thead>
 
@@ -51,6 +53,10 @@
                             <td class="px-6 py-5 font-medium">
                                 {{ $product->qty }}
 
+                            </td>
+
+                            <td class="px-6 py-5 font-medium">
+                                {{ $product->category->name ?? 'No Category' }}
                             </td>
 
                             <td class="px-6 py-5">
