@@ -1,54 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Product</h1>
-    <div>
-        @if(session()->has('success'))
-            <div>
-                {{ session()->get('success') }}
-            </div>
-        @endif
-    </div>
-    <div>
-        <a href="{{ route('product.create') }}">Create Product</a>
-    </div>
-    <div>
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            @foreach ($products as $product)
-            <tr>
-                <td>{{ $product->id }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->description }}</td>
-                <td>{{ $product->price }}</td>
-                <td>{{ $product->qty }}</td>
-                <td>
-                    <a href="{{ route('product.edit', $product->id) }}">Edit</a>
-                </td>
-                <td>
-                    <form method="post" action="{{ route('product.destroy', $product->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" name="" value= " Delete " />
-                    </form>
-                </td>
-            </tr>
-            @endforeach
+<x-app-layout>
 
-        </table>
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <h2 class="text-4xl font-bold text-[#6f4e37]">  Product Dashboard </h2>
+
+            <p class="text-gray-500 mt-1"> Manage your products easily </p>
+        </div>
+
+        <a href="{{ route('product.create') }}" class="bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-6 py-3 rounded-2xl shadow-lg transition">
+            Add Product
+        </a>
     </div>
-</body>
-</html>
+
+    <!-- success msg -->
+    @if(session('success'))
+        <div class="bg-green-100 border border-green-300 text-green-700 px-5 py-4 rounded-2xl mb-6 shadow">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-[#d2b48c] text-[#4b3621]">
+                    <tr>
+                        <th class="px-6 py-4 text-left">Name</th>
+                        <th class="px-6 py-4 text-left">Description</th>
+                        <th class="px-6 py-4 text-left">Price (Rs.)</th>
+                        <th class="px-6 py-4 text-left">Quantity</th>
+                        <th class="px-6 py-4 text-center">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @forelse($products as $product)
+                        <tr class="border-b hover:bg-[#f8f3ea] transition duration-200">
+
+                            <td class="px-6 py-5 font-semibold">
+                                {{ $product->name }}
+                            </td>
+
+                            <td class="px-6 py-5 text-gray-600">
+                                {{ $product->description }}
+                            </td>
+
+                            <td class="px-6 py-5 font-medium">
+                                {{ $product->price }}
+                            </td>
+
+                            <td class="px-6 py-5 font-medium">
+                                {{ $product->qty }}
+
+                            </td>
+
+                            <td class="px-6 py-5">
+
+                                <div class="flex justify-center gap-3">
+
+                                    <!-- edit btn -->
+                                    <a href="{{ route('product.edit', $product->id) }}"
+                                       class="bg-[#d2b48c] hover:bg-[#c19a6b] text-[#4b3621] px-4 py-2 rounded-xl shadow transition">
+                                    Edit
+                                    </a>
+
+                                    <!-- dlt btn -->
+                                    <form action="{{ route('product.destroy', $product->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                    <button type="submit" class="bg-[#e07a7a] hover:bg-[#c96565] text-white px-4 py-2 rounded-xl shadow transition">
+                                    Delete
+                                    </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center py-12">
+
+                                <h3 class="text-2xl font-semibold text-[#6f4e37] mb-2">
+                                    No Products Found
+                                </h3>
+
+                                <p class="text-gray-500 mb-5">
+                                    Start by creating your first product.
+                                </p>
+
+                                <a href="{{ route('product.create') }}" class="bg-[#6f4e37] text-white px-5 py-3 rounded-xl shadow">
+                                    Add Product
+                                </a>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</x-app-layout>
