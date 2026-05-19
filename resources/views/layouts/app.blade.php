@@ -18,20 +18,38 @@
 
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-        <!-- logo name -->
+        <!-- LOGO -->
         <a href="{{ route('dashboard') }}"
            class="text-2xl font-bold text-[#fff8e7]">
             CatalogNest
         </a>
 
+        <!-- NAV LINKS -->
+        <div class="flex items-center gap-6 text-[#fff8e7]">
 
-        <div class="flex items-center gap-4">
-
-            <a href="{{ route('product.create') }}"
-               class="bg-[#fff8e7] text-[#6f4e37] px-4 py-2 rounded-xl hover:bg-yellow-100 transition shadow">
-                Add Product
+            <a href="{{ route('dashboard') }}"
+               class="hover:text-yellow-200 transition">
+                Dashboard
             </a>
 
+            <a href="{{ route('product.index') }}"
+               class="hover:text-yellow-200 transition">
+                Products
+            </a>
+
+            <a href="{{ route('categories.index') }}"
+               class="hover:text-yellow-200 transition">
+                Categories
+            </a>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="flex items-center gap-4">
+
+
+
+            <!-- USER DROPDOWN -->
             <div class="relative" x-data="{ open: false }">
 
                 <button @click="open = !open"
@@ -47,7 +65,6 @@
 
                 </button>
 
-
                 <div x-show="open"
                      @click.away="open = false"
                      class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg overflow-hidden z-50">
@@ -59,15 +76,18 @@
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-
                         <button type="submit"
                                 class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">
                             Logout
                         </button>
                     </form>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
 </nav>
