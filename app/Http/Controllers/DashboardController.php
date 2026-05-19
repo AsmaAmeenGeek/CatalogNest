@@ -25,9 +25,14 @@ class DashboardController extends Controller
                     ->take(5)
                     ->get();
 
-    // ⭐ ADD THIS (FIX)
     $recentProducts = Product::with('category')
                     ->orderBy('created_at', 'desc')
+                    ->take(5)
+                    ->get();
+
+    // ⭐ NEW: ACTIVITY FEED
+    $recentActivities = Product::with('category')
+                    ->orderBy('updated_at', 'desc')
                     ->take(5)
                     ->get();
 
@@ -38,7 +43,8 @@ class DashboardController extends Controller
         'outOfStock',
         'lowStock',
         'lowStockProducts',
-        'recentProducts'
+        'recentProducts',
+        'recentActivities'
     ));
 }
 }

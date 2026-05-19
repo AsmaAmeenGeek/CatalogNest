@@ -221,6 +221,62 @@
 
 
 
+<!-- 🧾 RECENT ACTIVITY -->
+<div class="mt-10 bg-white rounded-3xl shadow-xl p-8">
+
+    <h2 class="text-2xl font-bold text-[#6f4e37] mb-6">
+        Recent Activity 🧾
+    </h2>
+
+    <div class="space-y-4">
+
+        @forelse($recentActivities as $activity)
+
+            <div class="flex justify-between items-center border-b pb-3">
+
+                <div>
+                    <p class="font-semibold text-[#6f4e37]">
+                        {{ $activity->name }}
+                    </p>
+
+                    <p class="text-sm text-gray-500">
+                        Category: {{ $activity->category->name ?? 'No Category' }}
+                    </p>
+                </div>
+
+                <div class="text-right">
+
+                    <p class="text-sm text-gray-600">
+                        Updated: {{ $activity->updated_at->diffForHumans() }}
+                    </p>
+
+                    <p class="text-xs text-gray-400">
+                        Created: {{ $activity->created_at->format('Y-m-d') }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        @empty
+
+            <p class="text-center text-gray-500">
+                No activity found
+            </p>
+
+        @endforelse
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
 
             <!-- QUICK ACTIONS -->
             <div class="grid md:grid-cols-2 gap-6">
