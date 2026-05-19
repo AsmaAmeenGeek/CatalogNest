@@ -12,9 +12,9 @@
             </p>
         </div>
 
-        <a href="{{ route('product.create') }}"
-            class="bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-6 py-3 rounded-2xl shadow-lg transition">
-            Add Product
+        <a href="{{ route('product.create') }}" class="bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-6 py-3 rounded-2xl shadow-lg transition">
+            <span class="text-2xl font-bold leading-none">+</span>
+            <span>Add Product</span>
         </a>
 
     </div>
