@@ -61,6 +61,98 @@
 
             </div>
 
+
+
+            <!-- 🆕 RECENT PRODUCTS -->
+<div class="mt-10 bg-white rounded-3xl shadow-xl p-8">
+
+    <h2 class="text-2xl font-bold text-[#6f4e37] mb-6">
+        Recent Products
+    </h2>
+
+    <div class="overflow-x-auto">
+
+        <table class="w-full">
+
+            <thead class="bg-[#f8f3ea] text-[#4b3621]">
+                <tr>
+                    <th class="px-4 py-3 text-left">Product</th>
+                    <th class="px-4 py-3 text-left">Category</th>
+                    <th class="px-4 py-3 text-left">Price</th>
+                    <th class="px-4 py-3 text-left">Qty</th>
+                    <th class="px-4 py-3 text-left">Created</th>
+                    <th class="px-4 py-3 text-left">Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @forelse($recentProducts as $product)
+
+                    <tr class="border-b hover:bg-[#f8f3ea]">
+
+                        <td class="px-4 py-3 font-semibold">
+                            {{ $product->name }}
+                        </td>
+
+                        <td class="px-4 py-3">
+                            {{ $product->category->name ?? 'No Category' }}
+                        </td>
+
+                        <td class="px-4 py-3">
+                            Rs. {{ $product->price }}
+                        </td>
+
+                        <td class="px-4 py-3">
+                            {{ $product->qty }}
+                        </td>
+
+                        <td class="px-4 py-3 text-gray-500">
+                            {{ $product->created_at->format('Y-m-d') }}
+                        </td>
+
+                        <td class="px-4 py-3">
+
+                            @if($product->qty == 0)
+                                <span class="text-red-600 font-semibold">Out</span>
+
+                            @elseif($product->qty <= 5)
+                                <span class="text-yellow-600 font-semibold">Low</span>
+
+                            @else
+                                <span class="text-green-600 font-semibold">In Stock</span>
+                            @endif
+
+                        </td>
+
+                    </tr>
+
+                @empty
+
+                    <tr>
+                        <td colspan="6" class="text-center py-6 text-gray-500">
+                            No recent products found
+                        </td>
+                    </tr>
+
+                @endforelse
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
             <!-- QUICK ACTIONS -->
             <div class="grid md:grid-cols-2 gap-6">
 

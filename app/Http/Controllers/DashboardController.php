@@ -9,21 +9,20 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalProducts = Product::count();
-        $totalCategories = Category::count();
+        return view('dashboard', [
+            'totalProducts' => Product::count(),
+            'totalCategories' => Category::count(),
 
-        $activeProducts = Product::where('qty', '>', 0)->count();
-        $outOfStock = Product::where('qty', 0)->count();
-        $lowStock = Product::where('qty', '>', 0)
-                          ->where('qty', '<=', 5)
-                          ->count();
+            'activeProducts' => Product::where('qty', '>', 0)->count(),
+            'outOfStock' => Product::where('qty', 0)->count(),
+            'lowStock' => Product::where('qty', '>', 0)
+                                ->where('qty', '<=', 5)
+                                ->count(),
 
-        return view('dashboard', compact(
-            'totalProducts',
-            'totalCategories',
-            'activeProducts',
-            'outOfStock',
-            'lowStock'
-        ));
+            'recentProducts' => Product::with('category')
+                                    ->latest()
+                                    ->take(5)
+                                    ->get(),
+        ]);
     }
 }
