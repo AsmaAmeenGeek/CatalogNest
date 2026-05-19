@@ -278,64 +278,6 @@
 
 
 
-            <!-- QUICK ACTIONS -->
-            <div class="grid md:grid-cols-2 gap-6">
-
-                <!-- PRODUCT MANAGEMENT -->
-                <div class="bg-[#f8f3ea] rounded-3xl p-8 shadow-md hover:shadow-xl transition duration-300">
-
-                    <h2 class="text-2xl font-bold text-[#6f4e37] mb-2">
-                        Product Management
-                    </h2>
-
-                    <p class="text-gray-600">
-                        Create, edit, update, and manage your products easily.
-                    </p>
-
-                    <a href="{{ route('product.index') }}"
-                       class="inline-block mt-4 bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-6 py-3 rounded-2xl shadow-lg transition">
-                        Go to Products
-                    </a>
-
-                </div>
-
-                <!-- QUICK ADD -->
-                <div class="bg-[#fff8e7] rounded-3xl p-8 shadow-md hover:shadow-xl transition duration-300">
-
-                    <h2 class="text-2xl font-bold text-[#6f4e37] mb-2">
-                        Quick Access
-                    </h2>
-
-                    <p class="text-gray-600">
-                        Add new products quickly and keep your catalog updated.
-                    </p>
-
-                    <a href="{{ route('product.create') }}"
-                       class="inline-block mt-4 bg-[#d2b48c] hover:bg-[#c19a6b] text-[#4b3621] px-6 py-3 rounded-2xl shadow-lg transition">
-                        Add New Product
-                    </a>
-
-                </div>
-
-                <!-- CATEGORY MANAGEMENT -->
-<div class="bg-[#f4efe6] rounded-3xl p-8 shadow-md hover:shadow-xl transition duration-300">
-
-    <h2 class="text-2xl font-bold text-[#6f4e37] mb-2">
-        Category Management
-    </h2>
-
-    <p class="text-gray-600">
-        Create and organize product categories easily.
-    </p>
-
-    <a href="{{ route('categories.index') }}"
-       class="inline-block mt-4 bg-[#6f4e37] hover:bg-[#5a3d2b] text-white px-6 py-3 rounded-2xl shadow-lg transition">
-
-        Go to Categories
-
-    </a>
-
-</div>
 
             </div>
 
