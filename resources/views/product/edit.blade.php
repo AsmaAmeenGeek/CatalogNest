@@ -10,13 +10,13 @@
 
             <!-- errors -->
             @if($errors->any())
-                <div class="bg-red-100 border border-red-300 text-red-700 p-4 rounded-2xl mb-6">
-                    <ul class="list-disc pl-5">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="bg-red-100 border border-red-300 text-red-700 p-4 rounded-2xl mb-6">
+                <ul class="list-disc pl-5">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             <form action="{{ route('product.update', $product->id) }}" method="POST">
@@ -24,12 +24,12 @@
                 @method('PUT')
                 <div class="mb-6">
                     <label class="block text-[#4b3621] font-semibold mb-2"> Product Name </label>
-                    <input type="text" name="name"  value="{{ $product->name }}" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c]" >
+                    <input type="text" name="name" value="{{ $product->name }}" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c]">
                 </div>
 
                 <div class="mb-6">
                     <label class="block text-[#4b3621] font-semibold mb-2"> Description </label>
-                    <textarea name="description" rows="5" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c]" >{{ $product->description }}</textarea>
+                    <textarea name="description" rows="5" class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c]">{{ $product->description }}</textarea>
                 </div>
 
                 <div class="mb-8">
@@ -46,15 +46,15 @@
                     <label class="block text-[#4b3621] font-semibold mb-2"> Category </label>
 
                     <select name="category_id"
-                     class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c] text-gray-500">
+                        class="w-full border border-gray-300 rounded-2xl p-4 focus:ring-2 focus:ring-[#d2b48c] focus:border-[#d2b48c] text-gray-500">
 
-                    <option value="">Select Category</option>
+                        <option value="">Select Category</option>
 
-                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}"
-                                 {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                                 {{ $category->name }}
-                            </option>
+                        @foreach($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
                         @endforeach
 
                     </select>

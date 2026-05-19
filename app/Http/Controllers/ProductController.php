@@ -38,7 +38,7 @@ class ProductController extends Controller
         'qty' => 'required|integer|min:0',
     ]);
 
-    // ✅ STEP 1: STORE PRODUCT IN VARIABLE
+    // store product first
     $product = Product::create([
         'name' => $request->name,
         'description' => $request->description,
@@ -47,7 +47,7 @@ class ProductController extends Controller
         'category_id' => $request->category_id,
     ]);
 
-    // ✅ STEP 2: NOW LOG ACTIVITY SAFELY
+    // log activity after product is created
     Activity::create([
         'type' => 'created',
         'message' => 'Product "' . $product->name . '" was created',

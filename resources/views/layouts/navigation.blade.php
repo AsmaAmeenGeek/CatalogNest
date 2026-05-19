@@ -16,41 +16,34 @@
                     </a>
                 </div>
 
-                <!-- NAV LINKS -->
-                <!-- NAV LINKS -->
-<!-- NAV LINKS -->
-<!-- NAV LINKS -->
-<div class="hidden sm:flex sm:items-center sm:ms-10 space-x-8">
+                <div class="hidden sm:flex sm:items-center sm:ms-10 space-x-8">
 
-    <!-- DASHBOARD -->
-    <x-nav-link
-        :href="route('dashboard')"
-        :active="request()->routeIs('dashboard')">
+                    <!-- dahbrd -->
+                    <x-nav-link
+                        :href="route('dashboard')"
+                        :active="request()->routeIs('dashboard')">
+                        Dashboard
+                    </x-nav-link>
 
-        🏠 Dashboard
-    </x-nav-link>
+                    <!-- prdcts -->
+                    <x-nav-link
+                        :href="route('products.index')"
+                        :active="request()->routeIs('products.*')">
+                        Products
+                    </x-nav-link>
 
-    <!-- PRODUCTS -->
-    <x-nav-link
-        :href="route('products.index')"
-        :active="request()->routeIs('products.*')">
+                    <!-- catgries -->
+                    <x-nav-link
+                        :href="route('categories.index')"
+                        :active="request()->routeIs('categories.*')">
+                        Categories
+                    </x-nav-link>
 
-        📦 Products
-    </x-nav-link>
-
-    <!-- CATEGORIES -->
-    <x-nav-link
-        :href="route('categories.index')"
-        :active="request()->routeIs('categories.*')">
-
-        🗂 Categories
-    </x-nav-link>
-
-</div>
+                </div>
 
             </div>
 
-            <!-- RIGHT SIDE -->
+            <!-- ryt side -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
                 <x-dropdown align="right" width="48">
@@ -63,12 +56,12 @@
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4"
-                                     xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 20 20">
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
 
                                     <path fill-rule="evenodd"
-                                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                          clip-rule="evenodd" />
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
 
                                 </svg>
                             </div>
@@ -111,9 +104,9 @@
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none transition">
 
                     <svg class="h-6 w-6"
-                         stroke="currentColor"
-                         fill="none"
-                         viewBox="0 0 24 24">
+                        stroke="currentColor"
+                        fill="none"
+                        viewBox="0 0 24 24">
 
                         <path
                             :class="{'hidden': open, 'inline-flex': ! open }"
@@ -157,12 +150,12 @@
 
             <!-- PRODUCTS -->
             <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
-    Products
-</x-responsive-nav-link>
+                Products
+            </x-responsive-nav-link>
 
-<x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
-    Categories
-</x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                Categories
+            </x-responsive-nav-link>
 
         </div>
 

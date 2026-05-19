@@ -19,7 +19,7 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // 🔥 AUTO STATUS BASED ON QTY (CLEAN + SAFE)
+    // auto set status based on quantity
     protected static function boot()
     {
         parent::boot();
@@ -29,9 +29,7 @@ class Product extends Model
         });
     }
 
-    // =========================
-    // 📦 INVENTORY HELPERS
-    // =========================
+    // helper methods for stock status
 
     public function isInStock()
     {

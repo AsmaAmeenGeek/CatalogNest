@@ -20,7 +20,7 @@
     </div>
 
 
-    <!-- SEARCH BAR -->
+    <!-- search bar -->
     <div class="mb-6">
         <form action="{{ route('product.index') }}" method="GET" class="flex gap-3">
 
@@ -41,7 +41,7 @@
     </div>
 
 
-    <!-- SUCCESS MESSAGE -->
+    <!-- success msg -->
     @if(session('success'))
     <div class="bg-green-100 border border-green-300 text-green-700 px-5 py-4 rounded-2xl mb-6 shadow">
         {{ session('success') }}
@@ -49,7 +49,7 @@
     @endif
 
 
-    <!-- TABLE -->
+    <!-- table -->
     <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
 
         <div class="overflow-x-auto">

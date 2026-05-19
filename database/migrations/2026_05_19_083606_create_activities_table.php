@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
-    $table->id();
-    $table->string('type'); // created, updated, deleted
-    $table->string('message');
-    $table->foreignId('product_id')->nullable();
-    $table->timestamps();
-});
+            $table->id();
+            $table->string('type'); // created, updated, deleted
+            $table->string('message');
+            $table->foreignId('product_id')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

@@ -37,7 +37,7 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        // ✅ REAL ACTIVITY (FIXED)
+        // recnt actvty
         $recentActivities = Activity::with('product.category')
             ->latest()
             ->take(5)
