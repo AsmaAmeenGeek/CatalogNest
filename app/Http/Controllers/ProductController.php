@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Activity;
 
 class ProductController extends Controller
 {
@@ -29,24 +30,33 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
-            'price' => 'required|numeric',
-            'qty' => 'required|integer|min:0',
-        ]);
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'nullable',
+        'price' => 'required|numeric',
+        'qty' => 'required|integer|min:0',
+    ]);
 
-        Product::create([
-           'name' => $request->name,
-           'description' => $request->description,
-           'price' => $request->price,
-           'qty' => $request->qty,
-           'category_id' => $request->category_id,
-]);
+    // ✅ STEP 1: STORE PRODUCT IN VARIABLE
+    $product = Product::create([
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'qty' => $request->qty,
+        'category_id' => $request->category_id,
+    ]);
 
-        return redirect()->route('product.index')->with('success', 'Product created successfully.');
-    }
+    // ✅ STEP 2: NOW LOG ACTIVITY SAFELY
+    Activity::create([
+        'type' => 'created',
+        'message' => 'Product "' . $product->name . '" was created',
+        'product_id' => $product->id,
+    ]);
+
+    return redirect()->route('product.index')
+        ->with('success', 'Product created successfully.');
+}
 
 
         public function edit($id){
@@ -74,13 +84,25 @@ public function update(Request $request, Product $product)
         'category_id' => $request->category_id,
     ]);
 
+    Activity::create([
+    'type' => 'updated',
+    'message' => 'Product "' . $product->name . '" was updated',
+    'product_id' => $product->id,
+]);
+
     return redirect()->route('product.index')
         ->with('success', 'Product updated successfully.');
 }
 
     public function destroy(Product $product)
     {
-        $product->delete();
+        Activity::create([
+    'type' => 'deleted',
+    'message' => 'Product "' . $product->name . '" was deleted',
+    'product_id' => $product->id,
+]);
+
+$product->delete();
 
         return redirect()->route('product.index')->with('success', 'Product deleted successfully!');
     }

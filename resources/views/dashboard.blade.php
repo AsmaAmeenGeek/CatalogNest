@@ -127,6 +127,68 @@
 </div>
 
 
+<div class="mt-10 bg-white rounded-3xl shadow-xl p-8">
+
+    <div class="flex justify-between items-center mb-6">
+
+        <h2 class="text-2xl font-bold text-red-600">
+            Out of Stock Alerts 🚨
+        </h2>
+
+        <span class="text-sm text-gray-500">
+            Items with quantity = 0
+        </span>
+
+    </div>
+
+    @if($outOfStockProducts->count() > 0)
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            @foreach($outOfStockProducts as $product)
+
+                <div class="border rounded-2xl p-5 bg-red-50 shadow-sm hover:shadow-md transition">
+
+                    <div class="flex justify-between items-start">
+
+                        <div>
+                            <h3 class="font-bold text-[#6f4e37] text-lg">
+                                {{ $product->name }}
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                {{ $product->category->name ?? 'No Category' }}
+                            </p>
+                        </div>
+
+                        <span class="bg-red-200 text-red-800 px-3 py-1 rounded-full text-sm font-semibold">
+                            0 left
+                        </span>
+
+                    </div>
+
+                    <p class="text-sm text-gray-600 mt-3">
+                        {{ $product->description }}
+                    </p>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    @else
+
+        <div class="text-center py-10 text-gray-500">
+            🎉 No out of stock products. Everything is available!
+        </div>
+
+    @endif
+
+</div>
+
+
+
 
 
 
@@ -236,22 +298,22 @@
 
                 <div>
                     <p class="font-semibold text-[#6f4e37]">
-                        {{ $activity->name }}
+                        {{ $activity->message }}
                     </p>
 
                     <p class="text-sm text-gray-500">
-                        Category: {{ $activity->category->name ?? 'No Category' }}
+                        Product: {{ $activity->product->name ?? 'Deleted Product' }}
                     </p>
                 </div>
 
                 <div class="text-right">
 
                     <p class="text-sm text-gray-600">
-                        Updated: {{ $activity->updated_at->diffForHumans() }}
+                        {{ ucfirst($activity->type) }}
                     </p>
 
                     <p class="text-xs text-gray-400">
-                        Created: {{ $activity->created_at->format('Y-m-d') }}
+                        {{ $activity->created_at->diffForHumans() }}
                     </p>
 
                 </div>
