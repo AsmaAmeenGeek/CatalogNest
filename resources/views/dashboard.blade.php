@@ -63,6 +63,75 @@
 
 
 
+
+
+            <!-- 🚨 LOW STOCK ALERT SECTION -->
+<div class="mt-10 bg-white rounded-3xl shadow-xl p-8">
+
+    <div class="flex justify-between items-center mb-6">
+
+        <h2 class="text-2xl font-bold text-[#6f4e37]">
+            Low Stock Alerts 🚨
+        </h2>
+
+        <span class="text-sm text-gray-500">
+            Items with quantity ≤ 5
+        </span>
+
+    </div>
+
+    @if($lowStockProducts->count() > 0)
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            @foreach($lowStockProducts as $product)
+
+                <div class="border rounded-2xl p-5 bg-yellow-50 shadow-sm hover:shadow-md transition">
+
+                    <div class="flex justify-between items-start">
+
+                        <div>
+                            <h3 class="font-bold text-[#6f4e37] text-lg">
+                                {{ $product->name }}
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                {{ $product->category->name ?? 'No Category' }}
+                            </p>
+                        </div>
+
+                        <span class="bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">
+                            {{ $product->qty }} left
+                        </span>
+
+                    </div>
+
+                    <p class="text-sm text-gray-600 mt-3">
+                        {{ $product->description }}
+                    </p>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    @else
+
+        <div class="text-center py-10 text-gray-500">
+            🎉 No low stock products. Everything is healthy!
+        </div>
+
+    @endif
+
+</div>
+
+
+
+
+
+
+
             <!-- 🆕 RECENT PRODUCTS -->
 <div class="mt-10 bg-white rounded-3xl shadow-xl p-8">
 
